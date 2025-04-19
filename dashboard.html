@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- 🔹 Hamburger Menu -->
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+    <!-- 🔹 Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="admin-label" id="adminLabel">Admin Panel</div>
+
+        <div class="dropdown">
+            <div class="dropdown-btn" onclick="toggleDropdown('quizzesDropdown')">
+                <i class="fas fa-clipboard-question"></i> Manage Quizzes ▼
+            </div>
+            <div class="dropdown-content" id="quizzesDropdown">
+                <a href="#" onclick="showQuizForm()"><i class="fas fa-plus"></i> Add Quiz</a>
+                <a href="#"><i class="fas fa-trash"></i> Remove Quiz</a>
+                <a href="#"><i class="fas fa-list"></i> Show All Quizzes</a>
+            </div>
+        </div>
+
+        <a href="#"><i class="fas fa-book"></i> Manage Courses</a>
+        <a href="#"><i class="fas fa-users"></i> User Management</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- 🔹 Main Content -->
+    <div class="main-content" id="mainContent">
+        <h1 id="mainHeading">Resources Management Panel</h1>
+        <p>Welcome to the admin panel. Manage courses, quizzes, users, and settings.</p>
+
+        <!-- 🔹 Quiz Form -->
+        <div class="quiz-section" id="quizSection">
+            <h2>Add New Quiz</h2>
+            <table id="quizTable">
+                <tr>
+                    <th>Question</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                    <th>Option 3</th>
+                    <th>Option 4</th>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="Enter question"></td>
+                    <td><input type="text" placeholder="Option 1"></td>
+                    <td><input type="text" placeholder="Option 2"></td>
+                    <td><input type="text" placeholder="Option 3"></td>
+                    <td><input type="text" placeholder="Option 4"></td>
+                </tr>
+            </table>
+            <button class="add-more-btn" onclick="addQuestion()">
+                <i class="fas fa-plus"></i> Add More Question
+            </button>
+            <button class="save-btn">Save Quiz</button>
+        </div>
+    </div>
+
+    <!-- 🔹 JavaScript -->
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            let mainContent = document.getElementById("mainContent");
+            let adminLabel = document.getElementById("adminLabel");
+            let mainHeading = document.getElementById("mainHeading");
+
+            if (sidebar.classList.contains("open")) {
+                sidebar.classList.remove("open");
+                mainContent.classList.remove("shift");
+                adminLabel.style.display = "none";
+                mainHeading.innerText = "Resources Management Panel";
+            } else {
+                sidebar.classList.add("open");
+                mainContent.classList.add("shift");
+                adminLabel.style.display = "block";
+                mainHeading.innerText = "Resources Management Panel";
+            }
+        }
+
+        function toggleDropdown(dropdownId) {
+            let dropdown = document.getElementById(dropdownId);
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        function showQuizForm() {
+            document.getElementById("quizSection").style.display = "block";
+        }
+
+        function addQuestion() {
+            let table = document.getElementById("quizTable");
+            let row = table.insertRow(-1);
+            for (let i = 0; i < 5; i++) {
+                let cell = row.insertCell(i);
+                cell.innerHTML = `<input type="text" placeholder="Enter text">`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
